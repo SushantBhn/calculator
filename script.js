@@ -35,3 +35,21 @@ function operate(operand1, operator, operand2) {
             break;
     }
 }
+
+const display = document.querySelector(".display");
+const buttonList = document.querySelectorAll("button");
+
+buttons = Array.from(buttonList);
+
+let displayValue = "";
+
+buttons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+        let buttonValue = event.target.textContent;
+
+        if("1234567890".includes(buttonValue)) {
+        displayValue += buttonValue;
+        display.textContent = displayValue;
+        }
+    });
+});
