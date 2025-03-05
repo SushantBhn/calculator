@@ -55,9 +55,15 @@ buttons.forEach((button) => {
     button.addEventListener("click", (event) => {
         let buttonValue = event.target.textContent;
 
-        if("1234567890".includes(buttonValue)) {
-        displayBuffer += buttonValue;
-        display.textContent = displayBuffer;
+        if("1234567890.".includes(buttonValue)) {
+            //Ignore '.' if already present in the operand
+            if(display.textContent.includes(".") && buttonValue === ".") {
+                display.textContent = display.textContent;
+            }
+            else {
+            displayBuffer += buttonValue;
+            display.textContent = displayBuffer;
+            }
         }
         else if("/*+-".includes(buttonValue)) {
             operand1 = Number(display.textContent);
