@@ -91,5 +91,8 @@ buttons.forEach((button) => {
             displayBuffer = " ";
             display.textContent = displayBuffer;  
         }
+        else if(buttonValue === "BKSP") {
+            display.textContent = display.textContent.slice(0, -1);
+        }
     });
 });
