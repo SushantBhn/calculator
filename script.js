@@ -49,42 +49,47 @@ const buttonList = document.querySelectorAll("button");
 
 buttons = Array.from(buttonList);
 
-let displayValue = " ";
+let displayBuffer = " ";
 
 buttons.forEach((button) => {
     button.addEventListener("click", (event) => {
         let buttonValue = event.target.textContent;
 
         if("1234567890".includes(buttonValue)) {
-        displayValue += buttonValue;
-        display.textContent = displayValue;
+        displayBuffer += buttonValue;
+        display.textContent = displayBuffer;
         }
         else if("/*+-".includes(buttonValue)) {
-            operand1 = Number(displayValue);
+            operand1 = Number(display.textContent);
             operator = buttonValue;
-            displayValue = " ";
+            displayBuffer = " ";
         }
         else if(buttonValue === "=") {
-            operand2 = Number(displayValue);
+            operand2 = Number(display.textContent);
             if(operator === null) {
                 //Do no operation
-                display.textContent = displayValue;    
+                display.textContent = display.textContent;    
             }
             else {
-                displayValue = operate(operand1, operator, operand2);
-                display.textContent = displayValue;
-                displayValue = " ";
+                displayBuffer = operate(operand1, operator, operand2);
+                display.textContent = displayBuffer;
+                displayBuffer = " ";
             }
             //Reset operator so no operations get performed when repeatedly pressing =
             operator = null;
         }
         else if(buttonValue === "NEG") {
-            displayValue = negate(displayValue);
-            display.textContent = displayValue;
+            display.textContent = negate(display.textContent);
         }
         else if(buttonValue === "%") {
-            displayValue = percent(displayValue);
-            display.textContent = displayValue;
+            display.textContent = percent(display.textContent);
+        }
+        else if(buttonValue === "AC") {
+            operand1 = 0;
+            operator = null;
+            operand2 = 0;
+            displayBuffer = " ";
+            display.textContent = displayBuffer;  
         }
     });
 });
