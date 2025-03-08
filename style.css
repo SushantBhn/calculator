@@ -23,7 +23,7 @@ button {
 
 .calculator {
     border: 10px solid black;
-    width: fit-content;
+    width: 412px;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -38,4 +38,8 @@ button {
     margin-bottom: 10px;
     text-align: right;
     font-size: 48px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    direction: rtl;
 }

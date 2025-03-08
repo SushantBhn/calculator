@@ -51,6 +51,19 @@ buttons = Array.from(buttonList);
 
 let displayBuffer = " ";
 
+function roundIfOverflow(value, maxLength = 10) {
+    let stringValue = String(value);
+    if(stringValue.length > maxLength) {
+        //If number is decimal, round it
+        if(stringValue.includes(".")) {
+            return Number(value).toFixed(maxLength - stringValue.split(".")[0].length - 1);
+    }
+    //If number is integer, return as is (will be handled by CSS overflow)
+    return value;
+    }
+    return value;
+}
+
 function eventHandler(buttonValue) {
     if("1234567890.".includes(buttonValue)) {
         //Ignore '.' if already present in the operand
@@ -75,6 +88,7 @@ function eventHandler(buttonValue) {
         }
         else {
             displayBuffer = operate(operand1, operator, operand2);
+            displayBuffer = roundIfOverflow(displayBuffer);
             display.textContent = displayBuffer;
             displayBuffer = " ";
         }
